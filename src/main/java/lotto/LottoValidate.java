@@ -2,8 +2,11 @@ package lotto;
 
 import static lotto.GameStatus.*;
 
-public class LottoValidate {
+/**
+ * LottoValidate 클래스는 사용자의 입력을 검증함
+ */
 
+public class LottoValidate {
     public static boolean validateUserMoney(Integer money) {
         if (money == null) {
             return false;

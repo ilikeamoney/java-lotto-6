@@ -2,6 +2,8 @@ package lotto;
 
 public class LottoGame implements Game{
 
+    private final Machine machine = LottoMachine.getMachine();
+
     @Override
     public void play() {
 
@@ -13,6 +15,6 @@ public class LottoGame implements Game{
     }
 
     private void init() {
-
+        machine.operating();
     }
 }
