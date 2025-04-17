@@ -12,7 +12,7 @@ public class Lotto {
 
     private final List<Integer> numbers;
 
-    private int bonusNumber;
+    private Integer bonusNumber;
 
     public Lotto(List<Integer> numbers) {
         validate(numbers);
@@ -46,7 +46,7 @@ public class Lotto {
         return numbers;
     }
 
-    public void setBonusNumber(int bonusNumber) {
+    public void setBonusNumber(Integer bonusNumber) {
         if (bonusNumber < 1) {
             throw new IllegalArgumentException("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
         } else if (bonusNumber > 45) {
@@ -54,5 +54,9 @@ public class Lotto {
         }
 
         this.bonusNumber = bonusNumber;
+    }
+
+    public Integer getBonusNumber() {
+        return bonusNumber;
     }
 }

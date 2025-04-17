@@ -7,17 +7,17 @@ import static lotto.GameStatus.*;
  */
 
 public class LottoValidate {
-    public static boolean validateUserMoney(Integer money) {
+    public static void validateUserMoney(Integer money) {
         if (money == null) {
-            return false;
+            throw new IllegalArgumentException("[Error] 입력이 잘못되었습니다.");
         }
 
         if (money < MIN_PRICE.getValue()) {
-            return false;
+            throw new IllegalArgumentException("[ERROR] 로또는 천원 단위 부터 구매 가능합니다.");
         }
 
         if (money % MIN_PRICE.getValue() != 0) {
-            return false;
+            throw new IllegalArgumentException("[ERROR] 로또는 천원 단위 부터 구매 가능합니다.");
         }
 
         String str = String.valueOf(money);
@@ -25,13 +25,20 @@ public class LottoValidate {
             char c = str.charAt(i);
 
             if (c < '0') {
-                return false;
+                throw new IllegalArgumentException("[Error] 입력이 잘못되었습니다.");
             } else if (c > '9') {
-                return false;
+                throw new IllegalArgumentException("[Error] 입력이 잘못되었습니다.");
             }
         }
-
-        return true;
     }
 
+    public static void validateWinnerTicket(String winnerNum, String bonusNum) {
+        if (!winnerNum.contains(",")) {
+            throw new IllegalArgumentException("[Error] 입력이 잘못되었습니다.");
+        }
+
+        if (bonusNum.length() > 1) {
+            throw new IllegalArgumentException("[Error] 입력이 잘못되었습니다.");
+        }
+    }
 }
