@@ -20,6 +20,7 @@ public class LottoMachine implements Machine {
 
     private Lotto winnerTickets;
 
+
     @Override
     public void operating() {
         init();
@@ -31,6 +32,7 @@ public class LottoMachine implements Machine {
         PrintGameState.inputTotalBuyTicketPrice();
         Integer money = Integer.valueOf(Console.readLine());
         setChallengeTickets(money);
+        Lotto.setUseMoney(money);
 
         // set winner number
         PrintGameState.inputWinNumber();
@@ -89,4 +91,5 @@ public class LottoMachine implements Machine {
 
         return machine;
     }
+
 }

@@ -14,6 +14,8 @@ public class Lotto {
 
     private Integer bonusNumber;
 
+    private static int useMoney;
+
     public Lotto(List<Integer> numbers) {
         validate(numbers);
         this.numbers = numbers;
@@ -58,5 +60,13 @@ public class Lotto {
 
     public Integer getBonusNumber() {
         return bonusNumber;
+    }
+
+    public static void setUseMoney(Integer money) {
+        useMoney = money;
+    }
+
+    public static Integer getUseMoney() {
+        return useMoney;
     }
 }
