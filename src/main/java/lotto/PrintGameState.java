@@ -25,7 +25,12 @@ public class PrintGameState {
         int cnt = 3;
         for (int i = 0; i < grade.length; i++) {
             String key = grade[i];
-            System.out.println(cnt + "개 일치 (" + strPrizeMoney.get(key) + ")원 - " + lottoDrawingResult.get(key) + "개");
+            if (key.equals("B")) {
+                cnt = 5;
+                System.out.println(cnt + "개 일치, 보너스 볼 일치 (" + strPrizeMoney.get(key) + ")원 - " + lottoDrawingResult.get(key) + "개");
+            } else {
+                System.out.println(cnt + "개 일치 (" + strPrizeMoney.get(key) + ")원 - " + lottoDrawingResult.get(key) + "개");
+            }
             cnt += 1;
         }
 

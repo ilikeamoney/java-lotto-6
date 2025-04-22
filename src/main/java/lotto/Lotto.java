@@ -23,7 +23,7 @@ public class Lotto {
 
     private void validate(List<Integer> numbers) {
         if (numbers.size() != 6) {
-            throw new IllegalArgumentException("[Error] 입력이 잘못되었습니다.");
+            throw new IllegalArgumentException("[ERROR] 입력이 잘못되었습니다.");
         }
 
         for (int i = 0; i < numbers.size(); i++) {
@@ -31,6 +31,12 @@ public class Lotto {
                 throw new IllegalArgumentException("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
             } else if (numbers.get(i) > 45) {
                 throw new IllegalArgumentException("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+            }
+
+            for (int j = 0; j < numbers.size(); j++) {
+                if (i != j && numbers.get(i).equals(numbers.get(j))) {
+                    throw new IllegalArgumentException("[ERROR] 로또 번호가 중복 되었습니다.");
+                }
             }
         }
     }

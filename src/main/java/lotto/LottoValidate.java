@@ -9,7 +9,7 @@ import static lotto.GameStatus.*;
 public class LottoValidate {
     public static void validateUserMoney(Integer money) {
         if (money == null) {
-            throw new IllegalArgumentException("[Error] 입력이 잘못되었습니다.");
+            throw new IllegalArgumentException("[ERROR] 입력이 잘못되었습니다.");
         }
 
         if (money < MIN_PRICE.getValue()) {
@@ -25,9 +25,9 @@ public class LottoValidate {
             char c = str.charAt(i);
 
             if (c < '0') {
-                throw new IllegalArgumentException("[Error] 입력이 잘못되었습니다.");
+                throw new IllegalArgumentException("[ERROR] 입력이 잘못되었습니다.");
             } else if (c > '9') {
-                throw new IllegalArgumentException("[Error] 입력이 잘못되었습니다.");
+                throw new IllegalArgumentException("[ERROR] 입력이 잘못되었습니다.");
             }
         }
     }
