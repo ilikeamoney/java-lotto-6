@@ -38,6 +38,7 @@ public class LotteryDrawing {
                 checkPrize(cnt, userTicket, bonusNum);
             }
         }
+
     }
 
     private int checkLotto(List<Integer> userTicket, List<Integer> winnerTicket) {
@@ -49,6 +50,7 @@ public class LotteryDrawing {
                 }
             }
         }
+
         return cnt;
     }
 

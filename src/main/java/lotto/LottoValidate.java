@@ -7,20 +7,15 @@ import static lotto.GameStatus.*;
  */
 
 public class LottoValidate {
-    public static void validateUserMoney(Integer money) {
-        if (money == null) {
+    public static Integer validateUserMoney(String str) {
+        if (str == null) {
             throw new IllegalArgumentException("[ERROR] 입력이 잘못되었습니다.");
         }
 
-        if (money < MIN_PRICE.getValue()) {
-            throw new IllegalArgumentException("[ERROR] 로또는 천원 단위 부터 구매 가능합니다.");
+        if (str.isEmpty()) {
+            throw new IllegalArgumentException("[ERROR] 입력이 잘못되었습니다.");
         }
 
-        if (money % MIN_PRICE.getValue() != 0) {
-            throw new IllegalArgumentException("[ERROR] 로또는 천원 단위 부터 구매 가능합니다.");
-        }
-
-        String str = String.valueOf(money);
         for (int i = 0; i < str.length(); i++) {
             char c = str.charAt(i);
 
@@ -30,6 +25,18 @@ public class LottoValidate {
                 throw new IllegalArgumentException("[ERROR] 입력이 잘못되었습니다.");
             }
         }
+
+        int money = Integer.parseInt(str);
+
+        if (money < MIN_PRICE.getValue()) {
+            throw new IllegalArgumentException("[ERROR] 로또는 천원 단위 부터 구매 가능합니다.");
+        }
+
+        if (money % MIN_PRICE.getValue() != 0) {
+            throw new IllegalArgumentException("[ERROR] 로또는 천원 단위 부터 구매 가능합니다.");
+        }
+
+        return money;
     }
 
     public static void validateWinnerTicket(String winnerNum, String bonusNum) {

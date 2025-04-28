@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static lotto.GameStatus.*;
@@ -30,9 +31,8 @@ public class LottoMachine implements Machine {
     private void init() {
         // set challenge ticket
         PrintGameState.inputTotalBuyTicketPrice();
-        Integer money = Integer.valueOf(Console.readLine());
-        setChallengeTickets(money);
-        Lotto.setUseMoney(money);
+        String strMoney = Console.readLine();
+        setChallengeTickets(strMoney);
 
         // set winner number
         PrintGameState.inputWinNumber();
@@ -52,14 +52,17 @@ public class LottoMachine implements Machine {
         Item.setBonusNumber(winnerTickets.getBonusNumber());
     }
 
-    public void setChallengeTickets(Integer money) {
+    public void setChallengeTickets(String str) {
         // is not a happened than setItem();
-        LottoValidate.validateUserMoney(money);
+        int money = LottoValidate.validateUserMoney(str);
+        Lotto.setUseMoney(money);
 
         challengeTickets = new ArrayList<>();
         while (money > 0) {
-            challengeTickets.add(getLottoNumbers());
-            money /= MIN_PRICE.getValue();
+            List<Integer> lottoNumbers = getLottoNumbers();
+            sortBefore(lottoNumbers);
+            challengeTickets.add(lottoNumbers);
+            money -= MIN_PRICE.getValue();
         }
     }
 
@@ -78,6 +81,33 @@ public class LottoMachine implements Machine {
         // is not a happened than setItem();
         winnerTickets = Lotto.getInstance(wNum);
         winnerTickets.setBonusNumber(bNum);
+    }
+
+    // bubble
+    private void sortBefore(List<Integer> lottoNumber) {
+        for (int i = 0; i < lottoNumber.size(); i++) {
+            for (int j = 0; j < lottoNumber.size() - 1; j++) {
+                if (lottoNumber.get(j) > lottoNumber.get(j + 1)) {
+                    int temp = lottoNumber.get(j);
+                    lottoNumber.set(j, lottoNumber.get(j + 1));
+                    lottoNumber.set(j + 1, temp);
+                }
+            }
+        }
+    }
+
+    // select
+    private void sortAfter(List<Integer> lottoNumber) {
+        for (int i = 1; i < lottoNumber.size(); i++) {
+            int key = lottoNumber.get(i);
+            int j = i - 1;
+
+            while (j >= 0 && lottoNumber.get(j) > key) {
+                lottoNumber.set(j + 1, lottoNumber.get(j));
+                j--;
+            }
+            lottoNumber.set(j + 1, key);
+        }
     }
 
     public List<Integer> getLottoNumbers() {

@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 public class PrintGameState {
@@ -19,17 +21,16 @@ public class PrintGameState {
     }
 
     public static void printLottoResult(Map<String, Integer> lottoDrawingResult, Map<String, Integer> lottoPrizeMoney, Map<String, String> strPrizeMoney) {
-        System.out.println("당첨 통계");
-        System.out.println("---");
+        printUserLottoTicket();
 
         int cnt = 3;
         for (int i = 0; i < grade.length; i++) {
             String key = grade[i];
             if (key.equals("B")) {
                 cnt = 5;
-                System.out.println(cnt + "개 일치, 보너스 볼 일치 (" + strPrizeMoney.get(key) + ")원 - " + lottoDrawingResult.get(key) + "개");
+                System.out.println(cnt + "개 일치, 보너스 볼 일치 (" + strPrizeMoney.get(key) + "원) - " + lottoDrawingResult.get(key) + "개");
             } else {
-                System.out.println(cnt + "개 일치 (" + strPrizeMoney.get(key) + ")원 - " + lottoDrawingResult.get(key) + "개");
+                System.out.println(cnt + "개 일치 (" + strPrizeMoney.get(key) + "원) - " + lottoDrawingResult.get(key) + "개");
             }
             cnt += 1;
         }
@@ -48,5 +49,13 @@ public class PrintGameState {
 
         double avg = (double) (100 * total) / useMoney;
         System.out.printf("총 수익률은 %.1f%%입니다.", avg);
+    }
+
+    private static void printUserLottoTicket() {
+        List<List<Integer>> lotto = Item.getChallengeTicket();
+        System.out.println(lotto.size() + "개를 구매했습니다.");
+        for (List<Integer> numbers : lotto) {
+            System.out.println(numbers);
+        }
     }
 }
